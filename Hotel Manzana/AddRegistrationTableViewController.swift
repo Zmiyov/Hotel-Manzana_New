@@ -9,7 +9,9 @@ import UIKit
 
 class AddRegistrationTableViewController: UITableViewController {
     
+    let checkInDateLabelIndexPath = IndexPath(row: 0, section: 1)
     let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
+    let checkOutDateLabelIndexPath = IndexPath(row: 2, section: 1)
     let checkOutDatePickerCellIndexPath = IndexPath(row: 3, section: 1)
     
     var isCheckInDatePickerVisible: Bool = false {
@@ -80,13 +82,14 @@ class AddRegistrationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath == checkInDatePickerCellIndexPath && isCheckOutDatePickerVisible == false {
+        if indexPath == checkInDateLabelIndexPath && isCheckOutDatePickerVisible == false {
             isCheckInDatePickerVisible.toggle()
-        } else if indexPath == checkOutDatePickerCellIndexPath && isCheckInDatePickerVisible == false {
+        } else if indexPath == checkOutDateLabelIndexPath && isCheckInDatePickerVisible == false {
             isCheckOutDatePickerVisible.toggle()
-        } else if indexPath == checkInDatePickerCellIndexPath || indexPath == checkOutDatePickerCellIndexPath {
+        } else if indexPath == checkInDateLabelIndexPath || indexPath == checkOutDateLabelIndexPath {
             isCheckInDatePickerVisible.toggle()
             isCheckOutDatePickerVisible.toggle()
         } else {
