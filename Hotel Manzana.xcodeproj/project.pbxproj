@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		A50B6E07283FCCAA00AEF1C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B6E06283FCCAA00AEF1C0 /* AppDelegate.swift */; };
 		A50B6E09283FCCAA00AEF1C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B6E08283FCCAA00AEF1C0 /* SceneDelegate.swift */; };
-		A50B6E0B283FCCAA00AEF1C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B6E0A283FCCAA00AEF1C0 /* ViewController.swift */; };
 		A50B6E0E283FCCAA00AEF1C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50B6E0C283FCCAA00AEF1C0 /* Main.storyboard */; };
 		A50B6E10283FCCAB00AEF1C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50B6E0F283FCCAB00AEF1C0 /* Assets.xcassets */; };
 		A50B6E13283FCCAB00AEF1C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50B6E11283FCCAB00AEF1C0 /* LaunchScreen.storyboard */; };
+		A50B6E1B283FCD6400AEF1C0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B6E1A283FCD6400AEF1C0 /* Model.swift */; };
+		A50B6E1D2841105500AEF1C0 /* AddRegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50B6E1C2841105500AEF1C0 /* AddRegistrationTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A50B6E03283FCCAA00AEF1C0 /* Hotel Manzana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hotel Manzana.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50B6E06283FCCAA00AEF1C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A50B6E08283FCCAA00AEF1C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A50B6E0A283FCCAA00AEF1C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A50B6E0D283FCCAA00AEF1C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A50B6E0F283FCCAB00AEF1C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A50B6E12283FCCAB00AEF1C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A50B6E14283FCCAB00AEF1C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A50B6E1A283FCD6400AEF1C0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A50B6E1C2841105500AEF1C0 /* AddRegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRegistrationTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,9 @@
 			children = (
 				A50B6E06283FCCAA00AEF1C0 /* AppDelegate.swift */,
 				A50B6E08283FCCAA00AEF1C0 /* SceneDelegate.swift */,
-				A50B6E0A283FCCAA00AEF1C0 /* ViewController.swift */,
 				A50B6E0C283FCCAA00AEF1C0 /* Main.storyboard */,
+				A50B6E1C2841105500AEF1C0 /* AddRegistrationTableViewController.swift */,
+				A50B6E1A283FCD6400AEF1C0 /* Model.swift */,
 				A50B6E0F283FCCAB00AEF1C0 /* Assets.xcassets */,
 				A50B6E11283FCCAB00AEF1C0 /* LaunchScreen.storyboard */,
 				A50B6E14283FCCAB00AEF1C0 /* Info.plist */,
@@ -138,8 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50B6E0B283FCCAA00AEF1C0 /* ViewController.swift in Sources */,
+				A50B6E1B283FCD6400AEF1C0 /* Model.swift in Sources */,
 				A50B6E07283FCCAA00AEF1C0 /* AppDelegate.swift in Sources */,
+				A50B6E1D2841105500AEF1C0 /* AddRegistrationTableViewController.swift in Sources */,
 				A50B6E09283FCCAA00AEF1C0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
