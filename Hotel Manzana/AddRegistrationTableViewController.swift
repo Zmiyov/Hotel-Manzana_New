@@ -39,6 +39,8 @@ class AddRegistrationTableViewController: UITableViewController {
     @IBOutlet var numberOfChildrenLabel: UILabel!
     @IBOutlet var numberOfChildrenStepper: UIStepper!
     
+    @IBOutlet var wifiSwitch: UISwitch!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +118,9 @@ class AddRegistrationTableViewController: UITableViewController {
         let email = emailTextField.text ?? ""
         let checkInDate = checkInDatePicker.date
         let checkOutDate = checkOutDatePicker.date
+        let numberOfAdults = Int(numberOfAdutsStepper.value)
+        let numberOfChilden = Int(numberOfChildrenStepper.value)
+        let hasWifi = wifiSwitch.isOn
         
         print("DONE TAPPED")
         print("firstname: \(firstName)")
@@ -123,6 +128,9 @@ class AddRegistrationTableViewController: UITableViewController {
         print("email: \(email)")
         print("Check-in date: \(checkInDate)")
         print("Check-out date: \(checkOutDate)")
+        print("Number of adults: \(numberOfAdults)")
+        print("Number of children: \(numberOfChilden)")
+        print("Wi-Fi: \(hasWifi)")
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
@@ -131,6 +139,9 @@ class AddRegistrationTableViewController: UITableViewController {
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         updateNumberOfGuest()
+    }
+    
+    @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
     }
     /*
     // MARK: - Navigation
