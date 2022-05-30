@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddRegistrationTableViewController: UITableViewController {
+class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeTableViewControllerDelegate {
     
     let checkInDateLabelIndexPath = IndexPath(row: 0, section: 1)
     let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
@@ -23,6 +23,23 @@ class AddRegistrationTableViewController: UITableViewController {
         didSet {
             checkOutDatePicker.isHidden = !isCheckOutDatePickerVisible
         }
+    }
+    
+    var roomType: RoomType?
+    
+    var registration: Registration? {
+        guard let roomType = roomType else {return nil}
+        
+        let firstName = firstNameTextField.text ?? ""
+        let lastName = lastNameTextField.text ?? ""
+        let email = emailTextField.text ?? ""
+        let checkInDate = checkInDatePicker.date
+        let checkOutDate = checkOutDatePicker.date
+        let numberOfAdults = Int(numberOfAdutsStepper.value)
+        let numberOfChildren = Int(numberOfChildrenStepper.value)
+        let hasWifi = wifiSwitch.isOn
+        
+        return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
     }
     
     @IBOutlet var firstNameTextField: UITextField!
@@ -41,21 +58,23 @@ class AddRegistrationTableViewController: UITableViewController {
     
     @IBOutlet var wifiSwitch: UISwitch!
     
+    @IBOutlet var roomTypeLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateDateViews()
         updateNumberOfGuest()
+        updateRoomType()
         
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
         checkInDatePicker.date = midnightToday
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func selectRoomTypeTableVievController(_ controler: SelectRoomTypeTableViewController, didSelect roomType: RoomType) {
+        self.roomType = roomType
+        updateRoomType()
     }
     
     func updateDateViews () {
@@ -68,6 +87,14 @@ class AddRegistrationTableViewController: UITableViewController {
     func updateNumberOfGuest() {
         numberOfAdultsLabel.text = "\(Int(numberOfAdutsStepper.value))"
         numberOfChildrenLabel.text = "\(Int(numberOfChildrenStepper.value))"
+    }
+    
+    func updateRoomType() {
+        if let roomType = roomType {
+            roomTypeLabel.text = roomType.name
+        } else {
+            roomTypeLabel.text = "Not set"
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -111,26 +138,8 @@ class AddRegistrationTableViewController: UITableViewController {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-
-    @IBAction func doneBarButtonTapped(_ sender: Any) {
-        let firstName = firstNameTextField.text ?? ""
-        let lastName = lastNameTextField.text ?? ""
-        let email = emailTextField.text ?? ""
-        let checkInDate = checkInDatePicker.date
-        let checkOutDate = checkOutDatePicker.date
-        let numberOfAdults = Int(numberOfAdutsStepper.value)
-        let numberOfChilden = Int(numberOfChildrenStepper.value)
-        let hasWifi = wifiSwitch.isOn
-        
-        print("DONE TAPPED")
-        print("firstname: \(firstName)")
-        print("lastname: \(lastName)")
-        print("email: \(email)")
-        print("Check-in date: \(checkInDate)")
-        print("Check-out date: \(checkOutDate)")
-        print("Number of adults: \(numberOfAdults)")
-        print("Number of children: \(numberOfChilden)")
-        print("Wi-Fi: \(hasWifi)")
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
@@ -143,6 +152,14 @@ class AddRegistrationTableViewController: UITableViewController {
     
     @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
     }
+   
+    @IBSegueAction func selectRoomType(_ coder: NSCoder) -> SelectRoomTypeTableViewController? {
+        let selectRoomTypeController = SelectRoomTypeTableViewController(coder: coder)
+        selectRoomTypeController?.delegate = self
+        selectRoomTypeController?.roomType = roomType
+        return selectRoomTypeController
+    }
+    
     /*
     // MARK: - Navigation
 
