@@ -17,7 +17,6 @@
 		A549B0412843B9BE00F535A1 /* RoomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549B0402843B9BE00F535A1 /* RoomType.swift */; };
 		A549B0442843BC1900F535A1 /* SelectRoomTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549B0432843BC1900F535A1 /* SelectRoomTypeTableViewController.swift */; };
 		A549B0462844D53900F535A1 /* RegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549B0452844D53900F535A1 /* RegistrationTableViewController.swift */; };
-		A549B0492844E16500F535A1 /* DetailsOfRegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549B0482844E16500F535A1 /* DetailsOfRegistrationTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		A549B0402843B9BE00F535A1 /* RoomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomType.swift; sourceTree = "<group>"; };
 		A549B0432843BC1900F535A1 /* SelectRoomTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoomTypeTableViewController.swift; sourceTree = "<group>"; };
 		A549B0452844D53900F535A1 /* RegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewController.swift; sourceTree = "<group>"; };
-		A549B0482844E16500F535A1 /* DetailsOfRegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOfRegistrationTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +91,6 @@
 				A549B0452844D53900F535A1 /* RegistrationTableViewController.swift */,
 				A549B0432843BC1900F535A1 /* SelectRoomTypeTableViewController.swift */,
 				A50B6E1C2841105500AEF1C0 /* AddRegistrationTableViewController.swift */,
-				A549B0482844E16500F535A1 /* DetailsOfRegistrationTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -175,7 +172,6 @@
 				A50B6E1D2841105500AEF1C0 /* AddRegistrationTableViewController.swift in Sources */,
 				A549B0442843BC1900F535A1 /* SelectRoomTypeTableViewController.swift in Sources */,
 				A50B6E09283FCCAA00AEF1C0 /* SceneDelegate.swift in Sources */,
-				A549B0492844E16500F535A1 /* DetailsOfRegistrationTableViewController.swift in Sources */,
 				A549B0462844D53900F535A1 /* RegistrationTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

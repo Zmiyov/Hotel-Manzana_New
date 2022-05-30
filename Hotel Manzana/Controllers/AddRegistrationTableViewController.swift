@@ -40,7 +40,18 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         let hasWifi = wifiSwitch.isOn
         
         return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
+       
     }
+    
+//    init?(coder: NSCoder, registration: Registration?) {
+//        self.registration = registration
+//        super.init(coder: coder)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        self.registration = nil
+//        super.init(coder: coder)
+//    }
     
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
@@ -138,6 +149,8 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         tableView.beginUpdates()
         tableView.endUpdates()
     }
+    
+
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
