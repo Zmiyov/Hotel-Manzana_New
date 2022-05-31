@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DetailsRegistrationTableViewControllerDelegate: AnyObject {
+    func detailsRegistrationTableViewController(_ controller: AddRegistrationTableViewController, didSave registration: Registration)
+}
+
 class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeTableViewControllerDelegate {
     
     let checkInDateLabelIndexPath = IndexPath(row: 0, section: 1)
@@ -39,6 +43,8 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         
         return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
     }
+    
+    weak var delegate: DetailsRegistrationTableViewControllerDelegate?
     
     var selectedItem: Registration? {
         didSet {

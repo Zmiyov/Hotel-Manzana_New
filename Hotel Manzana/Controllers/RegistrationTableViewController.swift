@@ -7,7 +7,11 @@
 
 import UIKit
 
-class RegistrationTableViewController: UITableViewController {
+class RegistrationTableViewController: UITableViewController, DetailsRegistrationTableViewControllerDelegate {
+    func detailsRegistrationTableViewController(_ controller: AddRegistrationTableViewController, didSave registration: Registration) {
+        <#code#>
+    }
+    
     
     var registrations: [Registration] = []
 
@@ -30,6 +34,24 @@ class RegistrationTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    @IBSegueAction func showEmployeeDetail(_ coder: NSCoder, sender: Any?) -> AddRegistrationTableViewController? {
+        
+        let detailViewController = AddRegistrationTableViewController(coder: coder)
+        detailViewController?.delegate = self
+        
+        guard
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell)
+        else {
+            return detailViewController
+        }
+        
+        let registration = registrations[indexPath.row]
+        detailViewController?.selectedItem = registration
+        
+        return detailViewController
     }
     
     // MARK: - Table view data source
