@@ -77,6 +77,15 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     @IBOutlet var doneButtonLabel: UIBarButtonItem!
     
+    @IBOutlet var chargesNumberOfNightsLabel: UILabel!
+    @IBOutlet var chargesNumberOfNightsDatesLabel: UILabel!
+    @IBOutlet var chargesSummForRoomLabel: UILabel!
+    @IBOutlet var chargesRoomDescriptionLabel: UILabel!
+    @IBOutlet var chargesSummForWifiLabel: UILabel!
+    @IBOutlet var chargesWifiStatusLabel: UILabel!
+    @IBOutlet var chargesTotalSummLabel: UITableViewCell!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateDateViews()
