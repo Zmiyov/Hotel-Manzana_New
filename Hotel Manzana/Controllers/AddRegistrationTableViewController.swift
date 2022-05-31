@@ -40,7 +40,21 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
     }
     
-    var selectedItem: Registration?
+    var selectedItem: Registration? {
+        didSet {
+            if let item = selectedItem {
+                firstNameTextField.text = item.firstName
+                lastNameTextField.text = item.lastName
+                emailTextField.text = item.eMailAdress
+                checkInDatePicker.date = item.checkInDate
+                checkOutDatePicker.date = item.checkOutDate
+                numberOfAdutsStepper.value = Double(item.numberOfAdults)
+                numberOfChildrenStepper.value = Double(item.numberOfChildren)
+                wifiSwitch.isOn = item.wiFi
+                roomType = item.roomType
+            }
+        }
+    }
 
     
     @IBOutlet var firstNameTextField: UITextField!
@@ -72,29 +86,15 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
         checkInDatePicker.date = midnightToday
-        
-//        if let item = selectedItem {
-//            firstNameTextField.text = item.firstName
-//            lastNameTextField.text = item.lastName
-//            emailTextField.text = item.eMailAdress
-//            print(item.firstName)
-//        }
+    
         if self.registration == nil {
             doneButtonLabel.isEnabled = false
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let item = selectedItem {
-            firstNameTextField.text = item.firstName
-            lastNameTextField.text = item.lastName
-            emailTextField.text = item.eMailAdress
-            print(item.firstName)
-        }
         updateDoneButtonState()
     }
-    
-    
     
     func selectRoomTypeTableVievController(_ controler: SelectRoomTypeTableViewController, didSelect roomType: RoomType) {
         self.roomType = roomType
@@ -103,7 +103,6 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     func updateDateViews () {
         checkOutDatePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: checkInDatePicker.date)
-        
         checkInDateLabel.text = checkInDatePicker.date.formatted(date: .abbreviated, time: .omitted)
         checkOutDateLabel.text = checkOutDatePicker.date.formatted(date: .abbreviated, time: .omitted)
     }
@@ -153,7 +152,6 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath == checkInDateLabelIndexPath && isCheckOutDatePickerVisible == false {
@@ -197,15 +195,4 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         selectRoomTypeController?.roomType = roomType
         return selectRoomTypeController
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
