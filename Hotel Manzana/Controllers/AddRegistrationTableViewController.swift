@@ -91,6 +91,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         updateDateViews()
         updateNumberOfGuest()
         updateRoomType()
+        charges()
         
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
@@ -103,6 +104,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     override func viewWillAppear(_ animated: Bool) {
         updateDoneButtonState()
+        charges()
     }
     
     func selectRoomTypeTableVievController(_ controler: SelectRoomTypeTableViewController, didSelect roomType: RoomType) {
@@ -136,7 +138,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         doneButtonLabel.isEnabled = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && (numberOfAdultsLabel.text != "0" || numberOfChildrenLabel.text != "0") && roomTypeLabel.text != "Not set"
     }
     
-    func charges () {
+    func charges() {
         let daysAmounth = Calendar.current.dateComponents([.day], from: checkInDatePicker.date, to: checkOutDatePicker.date)
         if let numberOfNights = daysAmounth.day {
             chargesNumberOfNightsLabel.text = "\(numberOfNights)"
@@ -146,16 +148,19 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
             chargesSummForRoomLabel.text = "\(summForRoom)"
             chargesRoomDescriptionLabel.text = (roomType?.name ?? "") + "@" + "\(roomType?.price ?? 0)" + "/night"
             
-            let summForWifi = numberOfNights * 10
-            chargesSummForWifiLabel.text = "\(summForWifi)"
-            if wifiSwitch.isEnabled {
+            if wifiSwitch.isOn {
+                let summForWifi = numberOfNights * 10
+                chargesSummForWifiLabel.text = "\(summForWifi)"
                 chargesWifiStatusLabel.text = "Yes"
+                let summTotal = summForRoom + summForWifi
+                chargesTotalSumLabel.text = "\(summTotal)"
             } else {
+                let summForWifi = 0
+                chargesSummForWifiLabel.text = "\(summForWifi)"
                 chargesWifiStatusLabel.text = "No"
+                let summTotal = summForRoom + summForWifi
+                chargesTotalSumLabel.text = "\(summTotal)"
             }
-            
-            let summTotal = summForRoom + summForWifi
-            chargesTotalSumLabel.text = "\(summTotal)"
         }
     }
     
@@ -207,6 +212,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         updateDateViews()
+        charges()
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -215,6 +221,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     }
     
     @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
+        charges()
     }
     
     @IBAction func textEditingChanged(_ sender: UITextField) {

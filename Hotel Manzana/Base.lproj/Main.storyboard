@@ -613,7 +613,7 @@
                         <outlet property="chargesRoomDescriptionLabel" destination="X8Z-bu-tmz" id="AoH-gB-GUd"/>
                         <outlet property="chargesSummForRoomLabel" destination="rY4-4j-cl8" id="cIB-of-iHw"/>
                         <outlet property="chargesSummForWifiLabel" destination="1gq-qI-yM1" id="M2Z-f6-tFT"/>
-                        <outlet property="chargesTotalSummLabel" destination="Gi8-iI-Tzu" id="gyH-Ou-PPQ"/>
+                        <outlet property="chargesTotalSumLabel" destination="NoI-IK-2nZ" id="Oer-3o-Uel"/>
                         <outlet property="chargesWifiStatusLabel" destination="QbL-6A-LIl" id="EEa-cX-g8f"/>
                         <outlet property="checkInDateLabel" destination="l0D-H8-XTR" id="dvK-Fk-p1p"/>
                         <outlet property="checkInDatePicker" destination="Kri-Ws-Erx" id="Ioe-6F-rJ9"/>
