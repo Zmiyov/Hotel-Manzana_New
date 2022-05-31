@@ -83,7 +83,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     @IBOutlet var chargesRoomDescriptionLabel: UILabel!
     @IBOutlet var chargesSummForWifiLabel: UILabel!
     @IBOutlet var chargesWifiStatusLabel: UILabel!
-    @IBOutlet var chargesTotalSummLabel: UITableViewCell!
+    @IBOutlet var chargesTotalSumLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -134,6 +134,29 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         let lastName = lastNameTextField.text ?? ""
         let email = emailTextField.text ?? ""
         doneButtonLabel.isEnabled = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && (numberOfAdultsLabel.text != "0" || numberOfChildrenLabel.text != "0") && roomTypeLabel.text != "Not set"
+    }
+    
+    func charges () {
+        let daysAmounth = Calendar.current.dateComponents([.day], from: checkInDatePicker.date, to: checkOutDatePicker.date)
+        if let numberOfNights = daysAmounth.day {
+            chargesNumberOfNightsLabel.text = "\(numberOfNights)"
+            chargesNumberOfNightsDatesLabel.text = checkInDatePicker.date.formatted(date: .abbreviated, time: .omitted) + " - " + checkOutDatePicker.date.formatted(date: .abbreviated, time: .omitted)
+            
+            let summForRoom = numberOfNights * (roomType?.price ?? 0)
+            chargesSummForRoomLabel.text = "\(summForRoom)"
+            chargesRoomDescriptionLabel.text = (roomType?.name ?? "") + "@" + "\(roomType?.price ?? 0)" + "/night"
+            
+            let summForWifi = numberOfNights * 10
+            chargesSummForWifiLabel.text = "\(summForWifi)"
+            if wifiSwitch.isEnabled {
+                chargesWifiStatusLabel.text = "Yes"
+            } else {
+                chargesWifiStatusLabel.text = "No"
+            }
+            
+            let summTotal = summForRoom + summForWifi
+            chargesTotalSumLabel.text = "\(summTotal)"
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
