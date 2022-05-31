@@ -24,9 +24,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
             checkOutDatePicker.isHidden = !isCheckOutDatePickerVisible
         }
     }
-    
     var roomType: RoomType?
-    
     var registration: Registration? {
         guard let roomType = roomType else {return nil}
         
@@ -40,18 +38,10 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         let hasWifi = wifiSwitch.isOn
         
         return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
-       
     }
     
-//    init?(coder: NSCoder, registration: Registration?) {
-//        self.registration = registration
-//        super.init(coder: coder)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        self.registration = nil
-//        super.init(coder: coder)
-//    }
+    var selectedItem: Registration?
+
     
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
@@ -71,6 +61,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     @IBOutlet var roomTypeLabel: UILabel!
     
+    @IBOutlet var doneButtonLabel: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +72,29 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
         checkInDatePicker.date = midnightToday
+        
+//        if let item = selectedItem {
+//            firstNameTextField.text = item.firstName
+//            lastNameTextField.text = item.lastName
+//            emailTextField.text = item.eMailAdress
+//            print(item.firstName)
+//        }
+        if self.registration == nil {
+            doneButtonLabel.isEnabled = false
+        }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let item = selectedItem {
+            firstNameTextField.text = item.firstName
+            lastNameTextField.text = item.lastName
+            emailTextField.text = item.eMailAdress
+            print(item.firstName)
+        }
+        updateDoneButtonState()
+    }
+    
+    
     
     func selectRoomTypeTableVievController(_ controler: SelectRoomTypeTableViewController, didSelect roomType: RoomType) {
         self.roomType = roomType
@@ -106,6 +119,13 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         } else {
             roomTypeLabel.text = "Not set"
         }
+    }
+    
+    func updateDoneButtonState() {
+        let firstName = firstNameTextField.text ?? ""
+        let lastName = lastNameTextField.text ?? ""
+        let email = emailTextField.text ?? ""
+        doneButtonLabel.isEnabled = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && (numberOfAdultsLabel.text != "0" || numberOfChildrenLabel.text != "0") && roomTypeLabel.text != "Not set"
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -161,9 +181,14 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         updateNumberOfGuest()
+        updateDoneButtonState()
     }
     
     @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
+    }
+    
+    @IBAction func textEditingChanged(_ sender: UITextField) {
+        updateDoneButtonState()
     }
    
     @IBSegueAction func selectRoomType(_ coder: NSCoder) -> SelectRoomTypeTableViewController? {

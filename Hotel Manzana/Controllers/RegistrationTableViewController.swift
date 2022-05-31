@@ -23,19 +23,10 @@ class RegistrationTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ViewDetails" {
-            if let cell = sender as? UITableViewCell {
-                if let indexPath = tableView.indexPath(for: cell)  {
-                    if let destination = segue.destination as? AddRegistrationTableViewController{
-                        let registration = registrations[indexPath.row]
-                        destination.firstNameTextField.text = registration.firstName
-                        destination.lastNameTextField.text = registration.lastName
-                        destination.emailTextField.text = registration.eMailAdress
-                        destination.checkInDatePicker.date = registration.checkInDate
-                        destination.checkOutDatePicker.date = registration.checkOutDate
-                        destination.numberOfAdutsStepper.value = Double(registration.numberOfAdults)
-                        destination.numberOfChildrenStepper.value = Double(registration.numberOfChildren)
-                        destination.wifiSwitch.isOn = registration.wiFi
-                    }
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPath(for: cell)  {
+                if let destination = segue.destination as? AddRegistrationTableViewController{
+                    destination.selectedItem = registrations[indexPath.row]
                 }
             }
         }
@@ -65,10 +56,13 @@ class RegistrationTableViewController: UITableViewController {
         return cell
     }
     
+    /*
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         performSegue(withIdentifier: "ViewDetails", sender: cell)
     }
+     */
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
