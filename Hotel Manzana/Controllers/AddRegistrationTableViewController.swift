@@ -40,22 +40,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
     }
     
-    var selectedItem: Registration? {
-        didSet {
-            if let item = selectedItem {
-                firstNameTextField.text = item.firstName
-                lastNameTextField.text = item.lastName
-                emailTextField.text = item.eMailAdress
-                checkInDatePicker.date = item.checkInDate
-                checkOutDatePicker.date = item.checkOutDate
-                numberOfAdutsStepper.value = Double(item.numberOfAdults)
-                numberOfChildrenStepper.value = Double(item.numberOfChildren)
-                wifiSwitch.isOn = item.wiFi
-                roomType = item.roomType
-            }
-        }
-    }
-
+    var selectedItem: Registration?
     
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
@@ -92,6 +77,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         updateNumberOfGuest()
         updateRoomType()
         charges()
+        updateVC()
         
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
@@ -105,6 +91,20 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     override func viewWillAppear(_ animated: Bool) {
         updateDoneButtonState()
         charges()
+    }
+    
+    func updateVC() {
+        if let item = selectedItem {
+            firstNameTextField.text = item.firstName
+            lastNameTextField.text = item.lastName
+            emailTextField.text = item.eMailAdress
+            checkInDatePicker.date = item.checkInDate
+            checkOutDatePicker.date = item.checkOutDate
+            numberOfAdutsStepper.value = Double(item.numberOfAdults)
+            numberOfChildrenStepper.value = Double(item.numberOfChildren)
+            wifiSwitch.isOn = item.wiFi
+            roomType = item.roomType
+        }
     }
     
     func selectRoomTypeTableVievController(_ controler: SelectRoomTypeTableViewController, didSelect roomType: RoomType) {
