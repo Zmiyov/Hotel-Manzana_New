@@ -9,16 +9,12 @@ import UIKit
 
 class RegistrationTableViewController: UITableViewController, AddRegistrationTableViewControllerDelegate {
     
-    
-    
     var registrations: [Registration] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-    
-    
     
     // MARK: - Table view data source
     

@@ -86,11 +86,18 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
             lastNameTextField.text = item.lastName
             emailTextField.text = item.eMailAdress
             checkInDatePicker.date = item.checkInDate
+            checkInDateLabel.text = item.checkInDate.formatted(date: .abbreviated, time: .omitted)
             checkOutDatePicker.date = item.checkOutDate
+            checkOutDateLabel.text = item.checkOutDate.formatted(date: .abbreviated, time: .omitted)
             numberOfAdutsStepper.value = Double(item.numberOfAdults)
+            numberOfAdultsLabel.text = "\(item.numberOfAdults)"
             numberOfChildrenStepper.value = Double(item.numberOfChildren)
+            numberOfChildrenLabel.text = "\(item.numberOfChildren)"
+            
             wifiSwitch.isOn = item.wiFi
+            
             roomType = item.roomType
+            roomTypeLabel.text = item.roomType.name
         } else {
             navigationItem.title = "New Registration"
         }
@@ -187,10 +194,6 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     // MARK: - ACTIONS
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        print(roomType?.name ?? "RoomType has not value")
-        print(firstNameTextField.text ?? "First name has not value")
-        print(lastNameTextField.text ?? "Last name has not value")
-        print(emailTextField.text ?? "Email has not value")
         
         guard let roomType = roomType,
               let firstName = firstNameTextField.text,
