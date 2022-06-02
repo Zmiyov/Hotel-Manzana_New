@@ -50,6 +50,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Registrations" id="B6X-M4-T5f">
+                        <barButtonItem key="leftBarButtonItem" title="Test" id="F13-pG-Sf6">
+                            <connections>
+                                <action selector="testButtonTapped:" destination="WmG-uq-Pxk" id="zoK-kr-IbY"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VuB-cz-CNB">
                             <connections>
                                 <segue destination="IQR-6G-0dd" kind="presentation" id="8ib-qu-i7G"/>
@@ -582,14 +587,13 @@
                     <navigationItem key="navigationItem" title="New Guest Registration" id="BRv-Lw-64z">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ns1-FL-vGL">
                             <connections>
-                                <action selector="cancelButtonTapped:" destination="PZY-yg-ROn" id="UaY-BC-78o"/>
+                                <action selector="cancelButtonTapped:" destination="PZY-yg-ROn" id="EF0-tx-osb"/>
                                 <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="SIO-zx-7U6"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="HEA-NX-P7t">
                             <connections>
-                                <action selector="doneButtonTapped:" destination="PZY-yg-ROn" id="NNl-lg-NSm"/>
-                                <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="eJa-Xz-tyD"/>
+                                <action selector="doneButtonTapped:" destination="PZY-yg-ROn" id="jRB-zU-AxR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

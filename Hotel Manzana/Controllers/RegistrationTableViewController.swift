@@ -16,13 +16,13 @@ class RegistrationTableViewController: UITableViewController, AddRegistrationTab
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
-        print("Did work")
+        print("DidLoad in list work")
 //        let name = registrations[0].firstName
 //        print(name)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Will appear")
+        print("Will appear in list")
     }
     
     
@@ -93,6 +93,11 @@ class RegistrationTableViewController: UITableViewController, AddRegistrationTab
         detailViewController?.registration = registration
         
         return detailViewController
+    }
+    
+    @IBAction func testButtonTapped(_ sender: Any) {
+        
+        print(registrations)
     }
     
     @IBAction func unwindFromAddRegistration(unwindSegue:UIStoryboardSegue) {
