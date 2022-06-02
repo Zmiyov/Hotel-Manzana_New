@@ -72,11 +72,12 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         if self.registration == nil {
             doneButtonLabel.isEnabled = false
         }
-        charges()
+        
         updateDateViews()
         updateNumberOfGuest()
         updateRoomType()
         updateVC()
+        charges()
     }
     
     func updateVC() {
