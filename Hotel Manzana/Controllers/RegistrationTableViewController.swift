@@ -18,15 +18,20 @@ class RegistrationTableViewController: UITableViewController {
     @IBAction func unwindFromAddRegistration(unwindSegue:UIStoryboardSegue) {
         guard let addRegistrationTableViewController = unwindSegue.source as? AddRegistrationTableViewController, let registration = addRegistrationTableViewController.registration else {return}
         registrations.append(registration)
+//        print(registrations[0].firstName)
         tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ViewDetails" {
+            print("Identifier segue work!")
             let cell = sender as! UITableViewCell
             if let indexPath = tableView.indexPath(for: cell)  {
-                if let destination = segue.destination as? AddRegistrationTableViewController{
+                print("Prepare indexpath: \(indexPath.row)")
+                if let destination = segue.destination as? AddRegistrationTableViewController {
+                    print("Destination is work")
                     destination.selectedItem = registrations[indexPath.row]
+                    print(registrations[0].firstName)
                 }
             }
         }
@@ -56,12 +61,13 @@ class RegistrationTableViewController: UITableViewController {
         return cell
     }
     
-    /*
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        performSegue(withIdentifier: "ViewDetails", sender: cell)
+//        let cell = tableView.cellForRow(at: indexPath)
+//        performSegue(withIdentifier: "ViewDetails", sender: cell)
+        print(registrations[indexPath.row].firstName + " " + "DidSelect Work!")
     }
-     */
+     
     
     /*
     // Override to support conditional editing of the table view.

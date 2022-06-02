@@ -40,7 +40,12 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
     }
     
-    var selectedItem: Registration?
+    var selectedItem: Registration? {
+        didSet {
+            updateVC()
+            print("DIDSET WORK")
+        }
+    }
     
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
@@ -77,7 +82,8 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         updateNumberOfGuest()
         updateRoomType()
         charges()
-        updateVC()
+        
+        print(selectedItem?.firstName ?? "IN DIDLOAD NO VALUE")
         
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
@@ -91,6 +97,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     override func viewWillAppear(_ animated: Bool) {
         updateDoneButtonState()
         charges()
+        print(selectedItem?.firstName ?? "IN WILL APPEAR NO VALUE2")
     }
     
     func updateVC() {
