@@ -200,21 +200,6 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
               let lastName = lastNameTextField.text,
               let email = emailTextField.text else {return}
         
-        let checkInDate = checkInDatePicker.date.formatted(date: .abbreviated, time: .omitted)
-        let checkOutDate = checkOutDatePicker.date.formatted(date: .abbreviated, time: .omitted)
-        let numberOfAdults = String(numberOfAdutsStepper.value)
-        let numberOfChildren = String(numberOfChildrenStepper.value)
-        let hasWifi = String(wifiSwitch.isOn)
-        
-        print(roomType.name + " " + firstName + " " + lastName + " " + email + " " + checkInDate + " " + checkOutDate + " " + numberOfAdults + " " + numberOfChildren + " " + hasWifi)
-        
-//        let checkInDate = checkInDatePicker.date
-//        let checkOutDate = checkOutDatePicker.date
-//        let numberOfAdults = Int(numberOfAdutsStepper.value)
-//        let numberOfChildren = Int(numberOfChildrenStepper.value)
-//        let hasWifi = wifiSwitch.isOn
-        
-        
         let registration = Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDatePicker.date, checkOutDate: checkOutDatePicker.date, numberOfAdults: Int(numberOfAdutsStepper.value), numberOfChildren: Int(numberOfChildrenStepper.value), wiFi: wifiSwitch.isOn, roomType: roomType)
         
         print(registration.firstName)
