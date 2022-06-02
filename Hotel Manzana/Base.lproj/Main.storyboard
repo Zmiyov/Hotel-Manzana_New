@@ -39,6 +39,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="IQR-6G-0dd" kind="presentation" destinationCreationSelector="showRegistrationDetails:sender:" id="vw4-l9-uPr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -53,29 +56,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="IQR-6G-0dd" kind="presentation" identifier="ShowDetails" id="6vz-0W-Khd"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w9M-6N-cx5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-869" y="-535"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="sWu-B7-rfr">
-            <objects>
-                <navigationController id="2GH-Q5-0Sz" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qga-Zq-8Hw">
-                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="WmG-uq-Pxk" kind="relationship" relationship="rootViewController" id="cKO-4G-XFV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Efl-zK-hZJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1680" y="-535"/>
+            <point key="canvasLocation" x="-1712" y="220"/>
         </scene>
         <!--New Guest Registration-->
         <scene sceneID="gmM-Ek-AmB">
@@ -261,7 +245,7 @@
                             <tableViewSection id="ziA-Sx-0nJ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="J4y-h1-0Qv">
-                                        <rect key="frame" x="0.0" y="726.99999237060558" width="390" height="42.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="726.99999237060547" width="390" height="42.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J4y-h1-0Qv" id="b10-MT-UGH">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="42.333332061767578"/>
@@ -305,7 +289,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bei-CX-e9J">
-                                        <rect key="frame" x="0.0" y="769.33332443237316" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="769.33332443237305" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bei-CX-e9J" id="giL-uK-Ndo">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
@@ -353,7 +337,7 @@
                             <tableViewSection id="3LI-Bu-Fyo">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rNQ-Mu-j2X">
-                                        <rect key="frame" x="0.0" y="849.33332443237316" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="849.33332443237305" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rNQ-Mu-j2X" id="Pfk-wo-V4L">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
@@ -401,7 +385,7 @@
                             <tableViewSection id="GSG-gQ-Dsg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="aae-8b-vHA" detailTextLabel="YkA-Hl-3KC" style="IBUITableViewCellStyleValue1" id="YzJ-3x-qkh">
-                                        <rect key="frame" x="0.0" y="929.33332443237316" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="929.33332443237305" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YzJ-3x-qkh" id="sb3-D4-LBv">
                                             <rect key="frame" x="0.0" y="0.0" width="373.33333333333331" height="44"/>
@@ -432,7 +416,7 @@
                             <tableViewSection headerTitle="Charges" id="ta7-1O-Lzc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Yga-3L-5cl">
-                                        <rect key="frame" x="0.0" y="1022.9999904632569" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="1022.9999904632568" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yga-3L-5cl" id="gLI-QA-0mI">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
@@ -599,11 +583,13 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ns1-FL-vGL">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="PZY-yg-ROn" id="UaY-BC-78o"/>
+                                <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="SIO-zx-7U6"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="HEA-NX-P7t">
                             <connections>
-                                <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="n68-aQ-XyW"/>
+                                <action selector="doneButtonTapped:" destination="PZY-yg-ROn" id="NNl-lg-NSm"/>
+                                <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="eJa-Xz-tyD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -682,6 +668,22 @@
             <point key="canvasLocation" x="715" y="220"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="sWu-B7-rfr">
+            <objects>
+                <navigationController id="2GH-Q5-0Sz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qga-Zq-8Hw">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WmG-uq-Pxk" kind="relationship" relationship="rootViewController" id="cKO-4G-XFV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Efl-zK-hZJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2523" y="220"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="Dc9-CZ-SBA">
             <objects>
                 <navigationController id="IQR-6G-0dd" sceneMemberID="viewController">
@@ -700,7 +702,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6vz-0W-Khd"/>
+        <segue reference="vw4-l9-uPr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

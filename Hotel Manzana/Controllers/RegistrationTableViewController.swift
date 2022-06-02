@@ -7,107 +7,98 @@
 
 import UIKit
 
-class RegistrationTableViewController: UITableViewController {
+class RegistrationTableViewController: UITableViewController, AddRegistrationTableViewControllerDelegate {
+    
+    
     
     var registrations: [Registration] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    var selectedRegistration: Registration?
-    
-    @IBAction func unwindFromAddRegistration(unwindSegue:UIStoryboardSegue) {
-        guard let addRegistrationTableViewController = unwindSegue.source as? AddRegistrationTableViewController, let registration = addRegistrationTableViewController.registration else {return}
-        registrations.append(registration)
-//        print(registrations[0].firstName)
         tableView.reloadData()
+        print("Did work")
+//        let name = registrations[0].firstName
+//        print(name)
     }
     
-   
+    override func viewWillAppear(_ animated: Bool) {
+        print("Will appear")
+    }
+    
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return registrations.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RegistrationCell", for: indexPath)
         let registration = registrations[indexPath.row]
+        
         var content = cell.defaultContentConfiguration()
         content.text = registration.firstName + " " + registration.lastName
         content.secondaryText = (registration.checkInDate..<registration.checkOutDate).formatted(date: .numeric, time: .omitted) + ":" + registration.roomType.name
         cell.contentConfiguration = content
-
+        
         return cell
     }
     
-    
-     
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            registrations.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    // MARK: - Table view Delegate
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRegistration = registrations[indexPath.row]
-        performSegue(withIdentifier: "ShowDetails", sender: nil)
-        print(registrations[indexPath.row].firstName + " " + "DidSelect Work!")
-    }
-    
-   
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetails" {
-            print("Identifier segue work!")
-            let destination = segue.destination as! AddRegistrationTableViewController
-            print("Destination is work")
-            destination.selectedItem = selectedRegistration
-            print(registrations[0].firstName)
         }
     }
+    
+    
+    // MARK: - AddRegistrationTableViewControllerDelegate
+    
+    
+    func addRegistrationTableViewController(_ controller: AddRegistrationTableViewController, didSave registration: Registration) {
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            registrations.remove(at: indexPath.row)
+            registrations.insert(registration, at: indexPath.row)
+        } else {
+            registrations.append(registration)
+        }
+        
+        tableView.reloadData()
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    // MARK: - Navigation
+    
+    @IBSegueAction func showRegistrationDetails(_ coder: NSCoder, sender: Any?) -> AddRegistrationTableViewController? {
+        
+        let detailViewController = AddRegistrationTableViewController(coder: coder)
+        detailViewController?.delegate = self
+        
+        guard
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell)
+        else {
+            return detailViewController
+        }
+        
+        let registration = registrations[indexPath.row]
+        detailViewController?.registration = registration
+        
+        return detailViewController
+    }
+    
+    @IBAction func unwindFromAddRegistration(unwindSegue:UIStoryboardSegue) {
+        tableView.reloadData()
+    }
+    
 }
+
 

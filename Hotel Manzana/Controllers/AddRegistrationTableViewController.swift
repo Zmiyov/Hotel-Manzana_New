@@ -7,45 +7,11 @@
 
 import UIKit
 
+protocol AddRegistrationTableViewControllerDelegate: AnyObject {
+    func addRegistrationTableViewController(_ controller: AddRegistrationTableViewController, didSave registration: Registration)
+}
+
 class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeTableViewControllerDelegate {
-    
-    let checkInDateLabelIndexPath = IndexPath(row: 0, section: 1)
-    let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
-    let checkOutDateLabelIndexPath = IndexPath(row: 2, section: 1)
-    let checkOutDatePickerCellIndexPath = IndexPath(row: 3, section: 1)
-    
-    var isCheckInDatePickerVisible: Bool = false {
-        didSet {
-            checkInDatePicker.isHidden = !isCheckInDatePickerVisible
-        }
-    }
-    var isCheckOutDatePickerVisible: Bool = false {
-        didSet {
-            checkOutDatePicker.isHidden = !isCheckOutDatePickerVisible
-        }
-    }
-    var roomType: RoomType?
-    var registration: Registration? {
-        guard let roomType = roomType else {return nil}
-        
-        let firstName = firstNameTextField.text ?? ""
-        let lastName = lastNameTextField.text ?? ""
-        let email = emailTextField.text ?? ""
-        let checkInDate = checkInDatePicker.date
-        let checkOutDate = checkOutDatePicker.date
-        let numberOfAdults = Int(numberOfAdutsStepper.value)
-        let numberOfChildren = Int(numberOfChildrenStepper.value)
-        let hasWifi = wifiSwitch.isOn
-        
-        return Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
-    }
-    
-    var selectedItem: Registration? {
-        didSet {
-            updateVC()
-            print("DIDSET WORK")
-        }
-    }
     
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
@@ -75,15 +41,31 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     @IBOutlet var chargesWifiStatusLabel: UILabel!
     @IBOutlet var chargesTotalSumLabel: UILabel!
     
+    let checkInDateLabelIndexPath = IndexPath(row: 0, section: 1)
+    let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
+    let checkOutDateLabelIndexPath = IndexPath(row: 2, section: 1)
+    let checkOutDatePickerCellIndexPath = IndexPath(row: 3, section: 1)
+    
+    var isCheckInDatePickerVisible: Bool = false {
+        didSet {
+            checkInDatePicker.isHidden = !isCheckInDatePickerVisible
+        }
+    }
+    var isCheckOutDatePickerVisible: Bool = false {
+        didSet {
+            checkOutDatePicker.isHidden = !isCheckOutDatePickerVisible
+        }
+    }
+    
+    weak var delegate: AddRegistrationTableViewControllerDelegate?
+    
+    var roomType: RoomType?
+    
+    var registration: Registration?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateDateViews()
-        updateNumberOfGuest()
-        updateRoomType()
-        charges()
-        
-        print(selectedItem?.firstName ?? "IN DIDLOAD NO VALUE")
         
         let midnightToday = Calendar.current.startOfDay(for: Date())
         checkInDatePicker.minimumDate = midnightToday
@@ -92,16 +74,24 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         if self.registration == nil {
             doneButtonLabel.isEnabled = false
         }
+        
+        updateDateViews()
+        updateNumberOfGuest()
+        updateRoomType()
+
+        updateVC()
+        
+        print("work!")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         updateDoneButtonState()
         charges()
-        print(selectedItem?.firstName ?? "IN WILL APPEAR NO VALUE2")
     }
     
     func updateVC() {
-        if let item = selectedItem {
+        if let item = registration {
+           // navigationItem.title = item.firstName
             firstNameTextField.text = item.firstName
             lastNameTextField.text = item.lastName
             emailTextField.text = item.eMailAdress
@@ -111,7 +101,16 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
             numberOfChildrenStepper.value = Double(item.numberOfChildren)
             wifiSwitch.isOn = item.wiFi
             roomType = item.roomType
+//        } else {
+//            navigationItem.title = "New Registration"
         }
+    }
+    
+    private func updateDoneButtonState() {
+        let firstName = firstNameTextField.text ?? ""
+        let lastName = lastNameTextField.text ?? ""
+        let email = emailTextField.text ?? ""
+        doneButtonLabel.isEnabled = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && (numberOfAdultsLabel.text != "0" || numberOfChildrenLabel.text != "0") && roomTypeLabel.text != "Not set"
     }
     
     func selectRoomTypeTableVievController(_ controler: SelectRoomTypeTableViewController, didSelect roomType: RoomType) {
@@ -138,12 +137,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         }
     }
     
-    func updateDoneButtonState() {
-        let firstName = firstNameTextField.text ?? ""
-        let lastName = lastNameTextField.text ?? ""
-        let email = emailTextField.text ?? ""
-        doneButtonLabel.isEnabled = !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && (numberOfAdultsLabel.text != "0" || numberOfChildrenLabel.text != "0") && roomTypeLabel.text != "Not set"
-    }
+   
     
     func charges() {
         let daysAmounth = Calendar.current.dateComponents([.day], from: checkInDatePicker.date, to: checkOutDatePicker.date)
@@ -212,9 +206,26 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         tableView.endUpdates()
     }
     
-
-    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        
+        guard let roomType = roomType,
+              let firstName = firstNameTextField.text,
+              let lastName = lastNameTextField.text,
+              let email = emailTextField.text else {return}
+              let checkInDate = checkInDatePicker.date
+              let checkOutDate = checkOutDatePicker.date
+              let numberOfAdults = Int(numberOfAdutsStepper.value)
+              let numberOfChildren = Int(numberOfChildrenStepper.value)
+              let hasWifi = wifiSwitch.isOn
+        
+        let registration = Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDate, checkOutDate: checkOutDate, numberOfAdults: numberOfAdults, numberOfChildren: numberOfChildren, wiFi: hasWifi, roomType: roomType)
+        
+        delegate?.addRegistrationTableViewController(self, didSave: registration)
+        
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: Any?) {
+        registration = nil
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
