@@ -15,15 +15,9 @@ class RegistrationTableViewController: UITableViewController, AddRegistrationTab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
-        print("DidLoad in list work")
-//        let name = registrations[0].firstName
-//        print(name)
+
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("Will appear in list")
-    }
     
     
     // MARK: - Table view data source
@@ -49,38 +43,23 @@ class RegistrationTableViewController: UITableViewController, AddRegistrationTab
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            registrations.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+    /*
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     registrations.remove(at: indexPath.row)
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     }
+     }
+     */
     
-    
-    // MARK: - AddRegistrationTableViewControllerDelegate
-    
-    
-    func addRegistrationTableViewController(_ controller: AddRegistrationTableViewController, didSave registration: Registration) {
-        
-        if let indexPath = tableView.indexPathForSelectedRow {
-            registrations.remove(at: indexPath.row)
-            registrations.insert(registration, at: indexPath.row)
-        } else {
-            registrations.append(registration)
-        }
-        
-        tableView.reloadData()
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
-    
+ 
     // MARK: - Navigation
     
+
     @IBSegueAction func showRegistrationDetails(_ coder: NSCoder, sender: Any?) -> AddRegistrationTableViewController? {
         
         let detailViewController = AddRegistrationTableViewController(coder: coder)
-        detailViewController?.delegate = self
+        detailViewController?.delegateRegistration = self
         
         guard
             let cell = sender as? UITableViewCell,
@@ -104,6 +83,22 @@ class RegistrationTableViewController: UITableViewController, AddRegistrationTab
         tableView.reloadData()
     }
     
+    // MARK: - AddRegistrationTableViewControllerDelegate
+    
+    
+    func addRegistrationTableViewController(_ controller: AddRegistrationTableViewController, didSave registration: Registration) {
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            registrations.remove(at: indexPath.row)
+            registrations.insert(registration, at: indexPath.row)
+        } else {
+            registrations.append(registration)
+        }
+        
+        tableView.reloadData()
+        dismiss(animated: true, completion: nil)
+        
+    }
 }
 
 

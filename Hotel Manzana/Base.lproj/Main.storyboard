@@ -39,9 +39,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="IQR-6G-0dd" kind="presentation" destinationCreationSelector="showRegistrationDetails:sender:" id="vw4-l9-uPr"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -50,17 +47,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Registrations" id="B6X-M4-T5f">
-                        <barButtonItem key="leftBarButtonItem" title="Test" id="F13-pG-Sf6">
-                            <connections>
-                                <action selector="testButtonTapped:" destination="WmG-uq-Pxk" id="zoK-kr-IbY"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VuB-cz-CNB">
                             <connections>
                                 <segue destination="IQR-6G-0dd" kind="presentation" id="8ib-qu-i7G"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="IQR-6G-0dd" kind="presentation" identifier="ShowDetails" id="6vz-0W-Khd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w9M-6N-cx5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -587,13 +582,13 @@
                     <navigationItem key="navigationItem" title="New Guest Registration" id="BRv-Lw-64z">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ns1-FL-vGL">
                             <connections>
-                                <action selector="cancelButtonTapped:" destination="PZY-yg-ROn" id="EF0-tx-osb"/>
-                                <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="SIO-zx-7U6"/>
+                                <action selector="cancelButtonTapped:" destination="PZY-yg-ROn" id="UaY-BC-78o"/>
+                                <segue destination="oD5-fP-vaK" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="0LT-BV-3G1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="HEA-NX-P7t">
                             <connections>
-                                <action selector="doneButtonTapped:" destination="PZY-yg-ROn" id="jRB-zU-AxR"/>
+                                <action selector="doneButtonTapped:" destination="PZY-yg-ROn" id="L0J-4g-HGp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -672,6 +667,23 @@
             <point key="canvasLocation" x="715" y="220"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="Dc9-CZ-SBA">
+            <objects>
+                <navigationController id="IQR-6G-0dd" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Euk-Jj-a3D"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="x4X-8R-eHj">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PZY-yg-ROn" kind="relationship" relationship="rootViewController" destinationCreationSelector="showRegistrationDetails:sender:" id="uep-nC-2K1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wxq-Lg-ftq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-869" y="221"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="sWu-B7-rfr">
             <objects>
                 <navigationController id="2GH-Q5-0Sz" sceneMemberID="viewController">
@@ -687,26 +699,9 @@
             </objects>
             <point key="canvasLocation" x="-2523" y="220"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Dc9-CZ-SBA">
-            <objects>
-                <navigationController id="IQR-6G-0dd" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Euk-Jj-a3D"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="x4X-8R-eHj">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="PZY-yg-ROn" kind="relationship" relationship="rootViewController" id="uep-nC-2K1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wxq-Lg-ftq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-869" y="221"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vw4-l9-uPr"/>
+        <segue reference="8ib-qu-i7G"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">

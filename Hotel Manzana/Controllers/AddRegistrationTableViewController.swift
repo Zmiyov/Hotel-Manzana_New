@@ -57,12 +57,10 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         }
     }
     
-    weak var delegate: AddRegistrationTableViewControllerDelegate?
+    weak var delegateRegistration: AddRegistrationTableViewControllerDelegate?
     
     var roomType: RoomType?
-    
     var registration: Registration?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,19 +72,16 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         if self.registration == nil {
             doneButtonLabel.isEnabled = false
         }
-        
+        charges()
         updateDateViews()
         updateNumberOfGuest()
         updateRoomType()
-
         updateVC()
     }
     
-
-    
     func updateVC() {
         if let item = registration {
-           // navigationItem.title = item.firstName
+            navigationItem.title = item.firstName
             firstNameTextField.text = item.firstName
             lastNameTextField.text = item.lastName
             emailTextField.text = item.eMailAdress
@@ -96,8 +91,8 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
             numberOfChildrenStepper.value = Double(item.numberOfChildren)
             wifiSwitch.isOn = item.wiFi
             roomType = item.roomType
-//        } else {
-//            navigationItem.title = "New Registration"
+        } else {
+            navigationItem.title = "New Registration"
         }
     }
     
@@ -210,20 +205,19 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         
         print(roomType.name + " " + firstName + " " + lastName + " " + email + " " + checkInDate + " " + checkOutDate + " " + numberOfAdults + " " + numberOfChildren + " " + hasWifi)
         
-        
 //        let checkInDate = checkInDatePicker.date
 //        let checkOutDate = checkOutDatePicker.date
 //        let numberOfAdults = Int(numberOfAdutsStepper.value)
 //        let numberOfChildren = Int(numberOfChildrenStepper.value)
 //        let hasWifi = wifiSwitch.isOn
         
+        
         let registration = Registration(firstName: firstName, lastName: lastName, eMailAdress: email, checkInDate: checkInDatePicker.date, checkOutDate: checkOutDatePicker.date, numberOfAdults: Int(numberOfAdutsStepper.value), numberOfChildren: Int(numberOfChildrenStepper.value), wiFi: wifiSwitch.isOn, roomType: roomType)
         
         print(registration.firstName)
         print(registration.roomType.price)
         
-        delegate?.addRegistrationTableViewController(self, didSave: registration)
-        
+        delegateRegistration?.addRegistrationTableViewController(self, didSave: registration)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any?) {
@@ -252,7 +246,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     
     @IBSegueAction func selectRoomType(_ coder: NSCoder) -> SelectRoomTypeTableViewController? {
         let selectRoomTypeController = SelectRoomTypeTableViewController(coder: coder)
-        selectRoomTypeController?.delegate = self
+        selectRoomTypeController?.delegateRoom = self
         selectRoomTypeController?.roomType = roomType
         return selectRoomTypeController
     }

@@ -13,7 +13,7 @@ protocol SelectRoomTypeTableViewControllerDelegate: AnyObject {
 
 class SelectRoomTypeTableViewController: UITableViewController {
     
-    weak var delegate: SelectRoomTypeTableViewControllerDelegate?
+    weak var delegateRoom: SelectRoomTypeTableViewControllerDelegate?
     
     var roomType: RoomType?
 
@@ -60,7 +60,7 @@ class SelectRoomTypeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         roomType = RoomType.all[indexPath.row]
-        delegate?.selectRoomTypeTableVievController(self, didSelect: roomType!)
+        delegateRoom?.selectRoomTypeTableVievController(self, didSelect: roomType!)
         tableView.reloadData()
     }
     
