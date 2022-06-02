@@ -15,6 +15,8 @@ class RegistrationTableViewController: UITableViewController {
         super.viewDidLoad()
     }
 
+    var selectedRegistration: Registration?
+    
     @IBAction func unwindFromAddRegistration(unwindSegue:UIStoryboardSegue) {
         guard let addRegistrationTableViewController = unwindSegue.source as? AddRegistrationTableViewController, let registration = addRegistrationTableViewController.registration else {return}
         registrations.append(registration)
@@ -22,20 +24,7 @@ class RegistrationTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ViewDetails" {
-            print("Identifier segue work!")
-            let cell = sender as! UITableViewCell
-            if let indexPath = tableView.indexPath(for: cell)  {
-                print("Prepare indexpath: \(indexPath.row)")
-                if let destination = segue.destination as? AddRegistrationTableViewController {
-                    print("Destination is work")
-                    destination.selectedItem = registrations[indexPath.row]
-                    print(registrations[0].firstName)
-                }
-            }
-        }
-    }
+   
     
     // MARK: - Table view data source
 
@@ -62,11 +51,6 @@ class RegistrationTableViewController: UITableViewController {
     }
     
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath)
-//        performSegue(withIdentifier: "ViewDetails", sender: cell)
-        print(registrations[indexPath.row].firstName + " " + "DidSelect Work!")
-    }
      
     
     /*
@@ -104,14 +88,26 @@ class RegistrationTableViewController: UITableViewController {
     }
     */
 
-    /*
+    // MARK: - Table view Delegate
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRegistration = registrations[indexPath.row]
+        performSegue(withIdentifier: "ShowDetails", sender: nil)
+        print(registrations[indexPath.row].firstName + " " + "DidSelect Work!")
+    }
+    
+   
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetails" {
+            print("Identifier segue work!")
+            let destination = segue.destination as! AddRegistrationTableViewController
+            print("Destination is work")
+            destination.selectedItem = selectedRegistration
+            print(registrations[0].firstName)
+        }
     }
-    */
-
 }
+
